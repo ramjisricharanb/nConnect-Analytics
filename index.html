@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Delivery Report</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js & Choices.js & SheetJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="index.css?v=8">
+    <style>
+        .choices__inner {
+            background-color: var(--bg-panel, #1e293b) !important;
+            border: 1px solid #334155 !important;
+            border-radius: 6px !important;
+            color: var(--text-primary, #f8fafc) !important;
+            min-height: 38px !important;
+            padding: 2px 8px !important;
+            font-size: 0.9rem;
+        }
+
+        .choices__input {
+            background-color: transparent !important;
+            color: var(--text-primary, #f8fafc) !important;
+        }
+
+        .choices__list--dropdown {
+            background-color: var(--bg-panel, #1e293b) !important;
+            border: 1px solid #334155 !important;
+            color: var(--text-primary, #f8fafc) !important;
+            z-index: 9999 !important;
+            margin-top: 4px;
+            border-radius: 6px;
+        }
+
+        .choices__list--dropdown .choices__item--selectable.is-highlighted {
+            background-color: #3b82f6 !important;
+            color: #fff !important;
+        }
+
+        .choices__list--multiple .choices__item {
+            background-color: #3b82f6 !important;
+            border: 1px solid #2563eb !important;
+            border-radius: 4px !important;
+        }
+
+        .choices[data-type*="select-multiple"] {
+            z-index: 100 !important;
+        }
+
+        .choices[data-type*="select-multiple"] .choices__button {
+            border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .choices {
+            min-width: 250px;
+            margin-bottom: 0px !important;
+        }
+    </style>
+    <script src="script.js?v=9" defer></script>
+</head>
+
+<body>
+    <div class="dashboard container animate-fade-in"><!-- Top Navigation / Data Loader -->
+        <div class="top-nav"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h2>Analytics Dashboard</h2>
+                <div style="font-size:0.8rem; color:#94a3b8;">Frontend Local Storage Engine</div>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px;"><label
+                        style="color: #94a3b8; font-size: 0.9rem; font-weight: 600;">Dataset:</label><select
+                        id="monthSelector"
+                        style="background-color: var(--bg-panel); color: white; border: 1px solid #334155; padding: 8px 12px; border-radius: 6px; outline: none; cursor: pointer; font-size: 0.95rem; min-width: 180px; font-weight: 500;">
+                        <option value="">Loading...</option>
+                    </select><button id="btn-delete-dataset"
+                        style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 6px 10px; border-radius: 6px; cursor: pointer; margin-left: 2px; display: none;"
+                        title="Delete Current Dataset">🗑️</button></div><button class="btn-primary"
+                    id="btn-open-upload" style="display: flex; align-items: center; gap: 6px;"><span
+                        style="font-size: 1.1rem; line-height: 1;">+</span>Upload Data </button>
+            </div>
+        </div><!-- Header Banner -->
+        <header class="hero-banner animate-slide-up" style="animation-delay: 0.1s;">
+            <h1>📋 ENGINEERING DELIVERY REPORT </h1>
+            <p id="period-covered" class="banner-subtitle">Period: Loading... | Prepared for Manager Review</p>
+        </header><!-- KPI Executive Cards -->
+        <section class="kpi-grid animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="kpi-box" style="--accent: #3b82f6;">
+                <div class="kpi-value" id="kpi-total">0</div>
+                <div class="kpi-label">TOTAL MRS</div>
+            </div>
+            <div class="kpi-box" style="--accent: #10b981;">
+                <div class="kpi-value" id="kpi-deploy-rate">0%</div>
+                <div class="kpi-label">DEPLOY RATE</div>
+            </div>
+            <div class="kpi-box" style="--accent: #8b5cf6;">
+                <div class="kpi-value" id="kpi-modules">0</div>
+                <div class="kpi-label">MODULES ACTIVE</div>
+            </div>
+            <div class="kpi-box" style="--accent: #eab308;">
+                <div class="kpi-value"><span id="kpi-avg-cycle">0</span><span class="unit">d</span></div>
+                <div class="kpi-label">AVG CYCLE TIME</div>
+            </div>
+            <div class="kpi-box" style="--accent: #ef4444;">
+                <div class="kpi-value" id="kpi-same-day">0%</div>
+                <div class="kpi-label">SAME DAY DEPLOYS</div>
+            </div>
+        </section><!-- Module Activity Bar Chart -->
+        <section class="panel animate-slide-up" style="animation-delay: 0.3s;">
+            <h3 class="panel-title">📊 MODULE ACTIVITY</h3>
+            <div class="chart-container" style="height: 250px;"><canvas id="moduleActivityChart"></canvas></div>
+        </section>
+        <div class="grid-2 animate-slide-up" style="animation-delay: 0.4s;"><!-- Environment Breakdown -->
+            <section class="panel">
+                <h3 class="panel-title">🌐 ENVIRONMENT BREAKDOWN</h3>
+                <div class="env-grid" id="env-boxes"><!-- JS Injected --></div>
+            </section><!-- Risk & Bottleneck -->
+            <section class="panel">
+                <h3 class="panel-title">⚠️ RISK & BOTTLENECK SUMMARY</h3>
+                <div class="risk-list">
+                    <div class="risk-item border-red"><span>MRs with Deployment>5 days</span><strong
+                            id="risk-delayed">0</strong></div>
+                    <div class="risk-item border-red"><span>MRs with Deployment>2x Avg Cycle</span><strong
+                            id="risk-outliers">0</strong></div>
+                    <div class="risk-item border-yellow"><span>Slowest Deployment Lead Time</span><strong><span
+                                id="risk-max">0</span><span style="font-size:0.9rem">d</span></strong></div>
+                </div>
+            </section>
+        </div><!-- Full KPI Table (from image 4) -->
+        <section class="panel animate-slide-up" style="animation-delay: 0.5s;">
+            <h3 class="panel-title">📊 KPI EXECUTIVE SUMMARY</h3>
+            <div class="kpi-long-grid">
+                <div class="kpi-long-box"><span class="muted">Total Processed</span><strong
+                        id="kpi-long-total">0</strong></div>
+                <div class="kpi-long-box"><span class="muted">Deployment Rate</span><strong
+                        id="kpi-long-dep-rate">0%</strong></div>
+                <div class="kpi-long-box"><span class="muted">Highest Activity Module</span><strong
+                        id="kpi-long-high-mod">-</strong></div>
+                <div class="kpi-long-box"><span class="muted">Avg Cycle Time</span><strong id="kpi-long-avg-cycle">0
+                        days</strong></div>
+            </div>
+        </section><!-- Filters & Details Table -->
+        <section class="panel animate-slide-up"
+            style="animation-delay: 0.6s; z-index: 10; position: relative; overflow: visible;">
+            <div class="filters-bar" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;">
+                <div style="flex: 1; min-width: 220px;"><label
+                        style="color:#94a3b8; display: block; font-size: 0.85rem; margin-bottom: 6px;">🔍 Filter by
+                        Module</label><select id="filter-module" multiple></select></div>
+                <div style="flex: 1; min-width: 180px;"><label
+                        style="color:#94a3b8; display: block; font-size: 0.85rem; margin-bottom: 6px;">Environment</label><select
+                        id="filter-env" multiple></select></div>
+                <div style="flex: 1; min-width: 220px;"><label
+                        style="color:#94a3b8; display: block; font-size: 0.85rem; margin-bottom: 6px;">Resource
+                        Name</label><select id="filter-resource" multiple></select></div>
+                <div style="flex: 1; min-width: 150px;"><label
+                        style="color:#94a3b8; display: block; font-size: 0.85rem; margin-bottom: 6px;">Status</label><select
+                        id="filter-status" multiple>
+                        <option value="">All</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Deployed">Deployed</option>
+                    </select></div>
+                <div style="display: flex; align-items: flex-end; padding-bottom: 2px;"><button class="btn-primary"
+                        id="btn-reset"
+                        style="height: 38px; display: flex; align-items: center; justify-content: center; padding: 0 20px; margin-left: auto;">Reset</button>
+                </div>
+            </div>
+        </section>
+        <section class="panel animate-slide-up" style="animation-delay: 0.65s; position: relative; z-index: 5;">
+            <h3 class="panel-title">🧩 MODULE INSIGHTS (CLICK TO EXPAND)</h3>
+            <div id="module-insights-grid" class="module-cards-grid"></div>
+        </section>
+        <section id="mr-details-section" class="panel animate-slide-up" style="animation-delay: 0.7s; display: none;">
+            <h3 class="panel-title">📋 MERGE REQUEST DETAILS</h3>
+            <div class="table-responsive">
+                <table class="data-table" id="detailsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Module</th>
+                            <th>Description</th>
+                            <th>Environment</th>
+                            <th>Sent to Merge</th>
+                            <th>Merged Date</th>
+                            <th>Deployed Date</th>
+                            <th>Cycle (d)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- JS Injected --></tbody>
+                </table>
+            </div>
+        </section>
+    </div><!-- Upload Modal Overlay -->
+    <div id="uploadModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
+        <div class="panel"
+            style="width: 400px; max-width: 90%; margin: 0; animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: white;">Upload New Month</h3><button id="btn-close-modal"
+                    style="background: none; border: none; color: #94a3b8; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0;">&times;
+                </button>
+            </div>
+            <div style="margin-bottom: 15px;"><label
+                    style="display: block; color: #94a3b8; font-size: 0.85rem; margin-bottom: 6px;">Month Name (e.g.
+                    March 2025)</label><input type="text" id="uploadMonthName" placeholder="Enter month name"
+                    style="width: 100%; background-color: var(--bg-main); color: white; border: 1px solid #334155; padding: 10px 12px; border-radius: 6px; outline: none; font-family: inherit; font-size: 0.95rem;">
+            </div>
+            <div style="margin-bottom: 25px;"><label
+                    style="display: block; color: #94a3b8; font-size: 0.85rem; margin-bottom: 6px;">Select Excel or JSON
+                    File (*.xlsx, *.csv, *.json)</label><input type="file" id="uploadJsonFile" accept=".json,.xlsx,.csv"
+                    style="width: 100%; color: #94a3b8; font-size: 0.9rem;" /></div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;"><button id="btn-cancel-upload"
+                    style="background-color: transparent; color: #94a3b8; border: 1px solid #334155; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;">Cancel</button><button
+                    id="btn-save-upload" class="btn-primary"
+                    style="opacity: 0.7; cursor: not-allowed; transition: all 0.2s;">Save Data</button></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+[
+  {
+    "Module": "Marketing",
+    "Description": "Fix for hidden marketing posts still visible in mobile APP",
+    "Sent to Merge date": "2/4/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/4/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Mahima Jassi P1"
+  },
+  {
+    "Module": "Opinion Poll",
+    "Description": "Feature: Response report CSV download in Opinion Poll module",
+    "Sent to Merge date": "2/2/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/2/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Opinion Poll",
+    "Description": "Feature: Response report CSV download in Opinion Poll module",
+    "Sent to Merge date": "2/2/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/2/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Santosh Sankanal P6"
+  },
+  {
+    "Module": "SMS",
+    "Description": "Migration: SMS module",
+    "Sent to Merge date": "2/6/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/6/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "SMS",
+    "Description": "Migration: SMS module",
+    "Sent to Merge date": "2/6/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/6/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Vendor Management",
+    "Description": "vendor_management_web justfile",
+    "Sent to Merge date": "2/9/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/9/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Parent concerns",
+    "Description": "Concerns Module Migration",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Parent concerns",
+    "Description": "Concerns Module Migration",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "HKS",
+    "Description": "fix: HKS branch quota limit error",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Santosh Sankanal P6"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "Bus Tracking: Adding new option in update gps server button id page.",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "Bus Tracking: Adding new option in update gps server button id page.",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "",
+    "Description": "Migration modules enhancements and fix",
+    "Sent to Merge date": "2/10/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/10/2026",
+    "Deployed date": "2/10/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "HKS",
+    "Description": "fix for updating building filter when branch filter is updated in the HkS module.",
+    "Sent to Merge date": "2/11/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/11/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Paren Check-In",
+    "Description": "New Parent Check In moule",
+    "Sent to Merge date": "2/12/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/12/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Paren Check-In",
+    "Description": "New Parent Check In moule",
+    "Sent to Merge date": "2/12/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/12/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Paren Check-In",
+    "Description": "New Parent Check In moule",
+    "Sent to Merge date": "2/12/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/12/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "User Management",
+    "Description": "Fix Staff and Student Filter Issue When Login Stats Toggle Is Enabled",
+    "Sent to Merge date": "2/13/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/13/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "User Management",
+    "Description": "Fix Staff and Student Filter Issue When Login Stats Toggle Is Enabled",
+    "Sent to Merge date": "2/13/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/13/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "A new screen to map the extra attachments with APPropriate document type.",
+    "Sent to Merge date": "2/16/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/16/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "A new screen to map the extra attachments with APPropriate document type.",
+    "Sent to Merge date": "2/16/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/16/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Parent Concern",
+    "Description": "Enh: Add single loader and handle multiple API calls on page limit change.",
+    "Sent to Merge date": "2/16/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/16/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Santosh Sankanal P6"
+  },
+  {
+    "Module": "Events & Gallery",
+    "Description": "Refactor the Events and Gallery modules using SpreadCheetah and handle the column ignore attribute.",
+    "Sent to Merge date": "2/17/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/17/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "Reach Disha",
+    "Description": "Upgraded Bun version to 1.3.9",
+    "Sent to Merge date": "2/17/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/17/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Santosh Sankanal P6"
+  },
+  {
+    "Module": "Vendor Management",
+    "Description": "Upgraded Bun version to 1.3.9",
+    "Sent to Merge date": "2/17/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/17/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Generic",
+    "Description": "Enh: Add fallback text for empty cell values in NC Table",
+    "Sent to Merge date": "2/17/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/17/2026",
+    "Deployed date": "2/18/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Learning & Development",
+    "Description": "Feature: Enable conditional PDF download in lessons.",
+    "Sent to Merge date": "2/18/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/18/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Learning & Development",
+    "Description": "Feature: Enable conditional PDF download in lessons.",
+    "Sent to Merge date": "2/18/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/18/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "MicroSchedule",
+    "Description": "PR for Ms submission percentage",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/19/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "MicroSchedule",
+    "Description": "PR for Ms submission percentage",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/19/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "Parent Concerns",
+    "Description": "Description Text Overflow Issue",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/19/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Logbook",
+    "Description": "Logbook Module Icon integration",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/19/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Logbook",
+    "Description": "Logbook Module Icon integration",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/19/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "MicroSchedule",
+    "Description": "Ms Bg job time out issue",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "Push Notifications",
+    "Description": "Push Notification Endpoint (nSuite)",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/20/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "Bus tracking Unknown doc type attachments update fix",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Push Notifications",
+    "Description": "Migration: Push Notifications module.",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Push Notifications",
+    "Description": "Migration: Push Notifications module.",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "nScribe AI",
+    "Description": "Displayed filter names instead of counts in tags.",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Nithin B P11, Harshini Bollineni P23, Harsh Khatri P18"
+  },
+  {
+    "Module": "Generic",
+    "Description": "Fix: Attachment Size Issue in Media Insert Dialog",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/20/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "Fix: Bus Tracking (Go to MAPPING) module UI issue.",
+    "Sent to Merge date": "2/23/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/23/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Re-Design",
+    "Description": "MR for redesign component enhancments and changes.",
+    "Sent to Merge date": "2/23/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/23/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Generic",
+    "Description": "(Bulk Upload Component)",
+    "Sent to Merge date": "2/24/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/24/2026",
+    "Deployed date": "2/24/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Opinion Poll",
+    "Description": "CSV Export for Opinion Poll Response Results",
+    "Sent to Merge date": "2/25/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/25/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Medagone Ranadeep P19"
+  },
+  {
+    "Module": "Opinion Poll",
+    "Description": "CSV Export for Opinion Poll Response Results",
+    "Sent to Merge date": "2/25/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/25/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Announcemnt",
+    "Description": "Pr for Annoucnement comment bad state fix",
+    "Sent to Merge date": "2/25/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/25/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Sreedhar Patti P13"
+  },
+  {
+    "Module": "Generic",
+    "Description": "PR for iOS warning fix",
+    "Sent to Merge date": "2/25/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/25/2026",
+    "Deployed date": "",
+    "Resource names": "Harshini Bollineni P23, Medagone Ranadeep P19, G Lakshmi Priyanka P4, Harsh Khatri P18"
+  },
+  {
+    "Module": "Generic",
+    "Description": "Pr for Playstore permission warning, build version bump and UI update handling for Gate",
+    "Sent to Merge date": "2/24/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/24/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Harsh Khatri P18"
+  },
+  {
+    "Module": "Announcement",
+    "Description": "Enhancement: Redesign Component and Restrict Dual API Calls on Status Filter in Announcement.",
+    "Sent to Merge date": "2/25/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/25/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Learning & Development",
+    "Description": "L&D Lesson DRM Toggle issue fix",
+    "Sent to Merge date": "2/26/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/26/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Sanjay Madari P10, Sreedhar Patti P13, G Lakshmi Priyanka P4"
+  },
+  {
+    "Module": "Learning & Development",
+    "Description": "Calling Modules: UI Enhancements.",
+    "Sent to Merge date": "2/26/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/26/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, G Lakshmi Priyanka P4, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Bus Tracking",
+    "Description": "related to Marking bus as disconnected if it is parked for more than 24 hours.",
+    "Sent to Merge date": "2/26/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/26/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "nScribe",
+    "Description": "nScribe AI \u2013 Enhancements",
+    "Sent to Merge date": "2/27/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/27/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Madari Ravalika P21, G Lakshmi Priyanka P4, M Gaurav Dhir P17"
+  },
+  {
+    "Module": "nScribe",
+    "Description": "nScribe AI \u2013 Enhancements",
+    "Sent to Merge date": "2/27/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/27/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Nithin B P11, G Lakshmi Priyanka P4, M Gaurav Dhir P17"
+  },
+  {
+    "Module": "Generic",
+    "Description": "related to gemini service lazy loading, package change and improvement - parent check-in audio transcription.",
+    "Sent to Merge date": "2/26/2026",
+    "Admin-Server-App": "Server",
+    "Merged date": "2/26/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "HKS",
+    "Description": "Fix: Validation for Branch Code, Dates, Branch Type, Quotas, and Holiday Fields before uploading in manpower distribution.",
+    "Sent to Merge date": "2/27/2026",
+    "Admin-Server-App": "Admin",
+    "Merged date": "2/27/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Rachamalla Sai Ram Reddy P29, Mahima Jassi P1, Santosh Sankanal P6, Sanjay Madari P10, Premchand Kodali P15"
+  },
+  {
+    "Module": "Attandance",
+    "Description": "PR for Attendance exam section loading issue and endpoint updated to common",
+    "Sent to Merge date": "2/27/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/27/2026",
+    "Deployed date": "2/27/2026",
+    "Resource names": "Sanjay Madari P10, Harsh Khatri P18"
+  },
+  {
+    "Module": "Generic",
+    "Description": "Pr for Playstore permission warning, build version bump and UI update handling for Gate pass module - Staff APP",
+    "Sent to Merge date": "2/24/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/24/2026",
+    "Deployed date": "",
+    "Resource names": "G Lakshmi Priyanka P4, Harsh Khatri P18"
+  },
+  {
+    "Module": "Generic",
+    "Description": "PR for Version bump 1.6.8->1.6.9",
+    "Sent to Merge date": "2/20/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/20/2026",
+    "Deployed date": "",
+    "Resource names": "Harsh Khatri P18"
+  },
+  {
+    "Module": "Package Upgrades",
+    "Description": "Flutter upgrade(v3.41.1) and package upgrades",
+    "Sent to Merge date": "2/19/2026",
+    "Admin-Server-App": "APP",
+    "Merged date": "2/19/2026",
+    "Deployed date": "",
+    "Resource names": "Harsh Khatri P18"
+  }
+]

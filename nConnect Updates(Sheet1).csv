@@ -1,0 +1,81 @@
+Project ID,Project Name,Task Id,Task Name,Task Description,Task Status,Task Delivery Date,Task Team Members,Member ID ,Name ,Lead,CTC
+NCON,nConnect,1,TPT Module,The prepared teacher,Done,26/09/2025,"Ravalika,Sreedhar,Nihal,Gaurav,Lakshmi,Harsh,Ranadeep,Sairam,Nithin,Sanjay","P21,P13,P12,P3,P5,P18,P19,P29,P11,P10",,,
+NCON,nConnect,2,Service Desk,Service desk approval matrix,Done,02/09/2025,"Chidanand,Manisha,Sanjay,Lakshmi","P14,P25,P5,P10",,,
+NCON,nConnect,3,MS Branch wise,Implementaed branch along with state,Done,21/08/2025,"Priyanka,Santhosh","P28,P6",,,
+NCON,nConnect,4,Micro schedule,"Bulkuplad,Deletion, submission",Done,19/09/2025,"Nithin,Nihal,Prathyusha,Pranav,Sairam,Premchand,Lakshmi","P111,P12,P22,P8,P29,P15",,,
+NCON,nConnect,5,GPS nTrack server,AIS140 protocol server implementation and Teltonika basic protocol server implementation. iTriangle basic protocol server implementation,Done,26/09/2025,"Sainath, Sanjay","P31,P10",,,
+NCON,nConnect,6,Admin Panel Redesign,Composables to handle file export and Api Loading,Done,23/09/2025,Manisha,P25,,,
+NCON,nConnect,7,Service Desk,Subscribe Tickets,Done,19/08/2025,"Manisha,Chidanad,Lakshmi","P25,P14,P5",,,
+NCON,nConnect,8,House Keeping Security Phase 3,"Staff type labels and icons have been removed, showing codes now.
+Device limit for KA Pilot branches increased from 3 to 5 devices.
+Mandatory comments for AOs and Principals in the Staff App have been removed.
+Option to upload attachments for staff attendance questions has been removed.
+Minimum character limit for comments has been removed.",Done ,23/09/2025,"Mahima,Nihal,Ravalika, Manisha,Mrinmoyee,Harsh,Ranadeep,Lakshmi,Santosh","P1,P12,P21,P25,P7,P18,P19,P5,P6",,,
+NCON,nConnect,9,Code Refactoring,For Staffa nd Parent Apps,Done,22/09/2025,"Harsh,Ranadeep,Santosh, Lakshmi,Santosh","P18,P19,P6,P5",,,
+NCON,nConnect,10,Code Refactoring,For Web Modules,Done,22/09/2025,"Sairam,Harshini,Lakshmi","P29,P23,P5",,,
+NCON,nConnect,11,Parent concerns,Esclation Matrix,Done,22/09/2025,"Nithin,Sanjay,Harsh,Kuhoo, Ravalika,Santosh","P11,P10,P18,P9,P21,P6",,,
+NCON,nConnect,12,Learning Pad,Intergrated in Digital Library,Done,11/09/2025,"Nihal,Harshini,Sanjay,Santosh","P12,P23,P10,P6",,,
+NCON,nConnect,13,Microschedule,Subject Maping,Done,04/09/2025,"Nihal,Harshini,Santosh","P12,P23,P6",,,
+NCON,nConnect,14,Digital Library,Bulk upload ,Done,28/08/2025,"Prateek,Nihal,Nithin,Pranav,Sairam,Prathyusha,Lakshmi","P2,P12,P11,P8,P29,P22,P5",,,
+NCON,nConnect,15,House Keeping Security Phase 2,"Addition of ‘Kitchen Housekeeping’ (Kitchen HK) staff role.
+‘Feedback Forms’ module in staff app and admin panel that includes ‘Work Evaluation Form’ and ‘Checklist’. 
+Vendor Management: Sub-module in the admin panel for onboarding and managing vendorsVendor Dashboard: Standalone web-app.",Done,02/08/2025,"Mahima,Nihal,Ravalika, Manisha,Sanjay,Mrinmoyee,Harsh,Ranadeep,Lakshmi","P1,P12,P21,P25,P10,P7,P18,P19,P5",,,
+NCON,nConnect,16,Opinion Poll,QR Code implemntation,Done,05/08/2025,"Chidanand,Harsh,Mouli,Pranav,Santosh","P14,P18,P20,P8,P6",,,
+NCON,nConnect,17,Prod UAT DB Sync,Created UAT env.,Done,21/08/2025,Prem chand,P15,,,
+NCON,nConnect,18,Gate Pass Module,Enhancements in The Gate Pass Module,Done,01/08/2025,"Sreedhar, Ravalika,Sanjay,Santosh","P13,P21,P10,P6",,,
+NCON,nConnect,19,Parents Concerns,Multiple Principal Access over chat,Done,19/09/2025,"nithin,Harshini,Santosh","P11,P23,P6",,,
+NCON,nConnect,20,Bus Tracking,Worked on the bus tracking requirements given by the stakeholders and also had meeting with them and prepared the designs and Documentation,Done,30/08/2025,"Prateek,Pranav,Mrinmoyee","P2,P8,P7",,,
+NCON,nConnect,21,Bus Tracking,Fleet management in Bus Tracking module,Done,23/07/2025,"Chidananda,Ayushman,Prathyusha","P14,P27,P22",,,
+NCON,nConnect,22,Bus Tracking,Teltonika Basic protocol server Implementation,Done,07/10/2025,Sanjay,P10,,,
+NCON,nConnect,23,Bus Tracking ,Added attachments feature in the fleet management,Done,15/09/2025,"Paul Manohar, Prathyusha,Santosh","P17,P22,P6",,,
+NCON,nConnect,24,Learning & Development,Fix quiz analytics export in L&D module,Done,24/09/2025,"Suresh,lakshmi","P16,P5",,,
+NCON,nConnect,25,Fee Payments,Testing: Verify that the Fee Breakdown is displayed correctly in the Parent App and ensure that parents can edit the payable amount. (Module - Fee Payments),Done,30/09/2025,"Mahima,Lakshmi","P1,P5",,,
+NCON,nConnect,26,Micor Schedule,Include Micro Schedule Topics in Micro Schedule Excel Export,Done,23/09/2025,"Suresh,Lakshmi","P16,P5",,,
+NCON,nConnect,27,Reach Disha,Updated backend OTP logic from 4 digits to 6 digits in Reach Disha,Done,09/09/2025,"Suresh,Priyanka,Lakshmi","P16,P5,P28",,,
+NCON,nConnect,28,Justfile Implementations,"Created simple just commands to automate tasks like building, running, and deploying apps, reducing manual steps for developers.",Done,23/09/2025,"Amogh,Premchand","P26,P15",,,
+NCON,nConnect,29,AI Calling System,"Low-latency, real-time AI calling system — starting with HR interview use cases, with potential to expand across support, counselling, and other domains.",Done,19/09/2025,Gaurav,P3,,,
+NCON,nConnect,30,AI Counsellor (RAG-Based Chatbot),"An intelligent chatbot for lead generation and student counselling — provides course information, answers queries, and engages prospects conversationally.",Done,15/09/2025,Gaurav,P3,,,
+NCON,nConnect,31,AI Student Performance Diagnostic,"Generates detailed student performance insights from exam reports — identifying focus areas, suggesting practice questions, and linking relevant learning resources.",Done,30/08/2025,Gaurav,P3,,,
+NCON,nConnect,32,Career Dreams (Motivational AI Avatars),"Enables teachers to upload a student’s photo and visualize their future as a doctor, engineer, etc. — inspiring students towards their career goals.",Done,25/08/2025,Gaurav,P3,,,
+NCON,nConnect,33,AI OCR for Administrative Forms POC,Prototype using Gemini for OCR on biodata and admission forms — automating data extraction and reducing manual entry in administrative workflows.,Done,7/09/2025,Gaurav,P3,,,
+NCON,nConnect,34,Service Desk,"Meeting: Service Desk Module Enhancements with Sagar.
+Add Global ID option when creating a ticket for other users. 
+Move from individual-based approvals to designation-based approvals.",Done,25/08/2025,Mahima,P1,,,
+NCON,nConnect,35,AWS to GCP Migration,All Instances from AWS to GCP migration,Done,04/09/2025,"Sanjay, Nithin,Sainath","P10,P11",,,
+NCON,nConnect,36,Parent Concerns,"Parents Concerns- Requirement like ""To display the employee’s name and employee number, who replied to the parents concerns."" & resolved concerns like to inactivate students ID",Done,30/08/2025,Prateek,P2,,,
+NCON,nConnect,37,Events and Gallery,"Adding College tab as Segment?Changes in the MIS report for All, Scheduled & Unscheduled.?Segments should be enabled or disabled as per the permitted segment to the User.",In Progress,,"Prateek,Sairam,Ayushman,Paul Manohar","P2,P29,P27,P17",,,
+NCON,nConnect,38,Global Emp ID,Login Page,In Progress,,"Harsh, Ranadeep,Harshini,Nithin,Santosh","P18,P19,P23,p11",,,
+NCON,nConnect,39,nScribe AI,"Leveraging AI for in-depth analysis of adoption calls. Nscribe, will process approximately 600,000 calls monthly to deliver automated summarization, issue identification, sentiment analysis, teacher conversation quality assessment, and dropout risk analysis. This provides a comprehensive bird's-eye view, enabling data-driven insights to enhance teacher per",In Progress,,"Sainath,Nithin,Gaurav","P30,P11,P3",,,
+NCON,nConnect,40,Financial Performance,The Financial Performance module enables real-time tracking and accountability of financial and operational commitments made by AGMs,In Progress,,"Prathyusha,Kuhoo,Sanjay,Sairam","P22,P9,P10,P29",,,
+NCON,nConnect,41,AI Tutor,Personalized learning assistant powered by AI.,In Progress,,"Sainath,Mouli,Mrinmoyee","P30,P20,P7",,,
+NCON,nConnect,42,App Usage Analytics,"Module wise,Itemwise, analytics in staff , parent, and admin.",In Progress,,"Sairam,Nithin,Harsh,sreedhar,Prathyusha,Santosh","P29,P11,P18,P13,P22",,,
+NCON,nConnect,43,Bug Fixes," Fixed Invalid exam type"" error by replacing old exam stats API with module inputs API and refactoring exam provider code.
+Fixed: Made the description field in the WellnessCategory model optional to handle null values returned by the backend.
+Adoption calling unique call report fix
+ Send announcement notification outside transaction
+Send schedule announcement ObjectDisposedException issue",In Progress,,"Paul, suresh,Ranadeep,Ayushman,Harsh","P17,P16,P18,P19,P27",,,
+NCON,nConnect,44,Internal Design System,Building a comprehensive design system to ensure consistency and faster development.,In Progress,,"Prathyusha,Ravalika,Manisha,Mouli,Sairam,Harshini,Priyanka,Aditya,Ayushman,Aakansha","P22,P21,P25,P20,P29,P23,P28,P24,P27",,,
+NCON,nConnect,45,Module Migration,Module Migration from Vue2 - Nuxt3 for all Modules,In Progress,,"Harshini,Prathyusha,Ravalika,Ayushman,Aditya,Manisha,Sairam,Priyanka","P23,P22,P21,P27,P24,P25,P29,P28",,,
+NCON,nConnect,46,Clickhouse Migration,"Implemented ClickHouse database to reduce the load on the PostgreSQL database and improve query performance on Announcements,Opinion poll Marketing, wellness, events and Gallery Modules",In Progress,,"Nithin,Premchand,Sainath","P11,P15,P30",,,
+NCON,nConnect,47,MS nSports and Soft skills,Revamp,In Progress,,"Aditya,Prathyusha,Nihal","P24,P22,P12",,,
+NCON,nConnect,48,mobile Responsive Design Systems,Components for the mobile resposive screens,In Progress,,"Prathyusha,harshini,Ravalika","P22,P23,P21",,,
+NCON,nConnect,49,Fee Payments,Show Headwise count in the App,In Progress,,"Nihal,Harsh,Santosh","P12,P18,P6",,,
+NCON,nConnect,50,Learning & Development,Intergrating SCROM video format in the L&D Module,In Progress,,"Sairam,Nithin,Sainath","P29,P11,P30",,,
+NCON,nConnect,51,Bus Tracking ,Bus CCTV POC Task,In Progress,,Nihal,P12,,,
+NCON,nConnect,52,House Keeping Security Demo,"HKS meeting with the Operations team regarding Feedback Forms dashboard.
+HKS continuously coordinates with the Operations team to address any issues or clarifications.
+HKS pre-checks the system before every demo to ensure smooth functioning.",In Progress,,"Mahima,nihal,Chindanand","P1,P12,P14",,,
+NCON,nConnect,53,AI Video Generartion,We are building an automated Manim-based video generation pipeline that takes a topic as input and produces a narrated educational video,In Progress,,"Amogh, Gaurav,Pratiyank","P26,P3",,,
+NCON,nConnect,54,Global EmpID Filter,Implemented Global Emp ID Fliter for required Modules,In Progress,,"Suresh, Amogh,Nithin","P16,P26,P11",,,
+NCON,nConnect,55,Export Reports Performance Improvement,Improving exporting efficiency of Excels by using Spread Cheeta,In Progress,,Suresh,P16,,,
+NCON,nConnect,56,Pronunciation Assessment Module ,Worked on improving the pronunciation checking system by making it more accurate and reliable in detecting spoken word errors.,In Progress,,"Amogh,gaurav","P26,P3",,,
+NCON,nConnect,57,Learning & Development,"Revamping the LMS design to improve user experience with a more intuitive interface, streamlined navigation, and enhanced tools for both staff and instructors. The update will focus on accessibility and engagement.",Up Coming,,,,,,
+NCON,nConnect,58,MS Hierarchy,"The MS hierarchy consolidates all state syllabi into a single module on nConnect, where topics can easily be processed and sent to teachers via Micro schedule. This process streamlines operations while accommodating the varying timelines of different states and boards.",Up Coming,,,,,,
+NCON,nConnect,59,Narayana AI Counseller,"Introducing an RAG-based AI chatbot for deployment on narayanagroup.com. This intelligent counsellor will provide instant, comprehensive information about Narayana's diverse educational programs (schools, colleges, etc.) while efficiently capturing leads, enhancing website user experience and streamlining the prospective student inquiry process.",Up Coming,,,,,,
+NCON,nConnect,60,HKS Phase 4,"Feedback Forms Analytics Dashboard, Housekeeping checklist for wardens",Up Coming,,,,,,
+NCON,nConnect,61,HR Demo,HR demo - AI Powered Faculty Evaluation Reports.,Up Coming,,,,,,
+NCON,nConnect,62,nVision,Form Extraction AI: AI-based tool that extracts structured data from handwritten/typed forms or PDFs.,Up Coming,,,,,,
+NCON,nConnect,63,Adopotion Calling ,"Added a call summary feature with sections for Summary, Transcript, and Call Analysis, along with audio playback for recorded conversations.?Enhanced the call history with new filters and an improved, user-friendly UI.",Up Coming,,,,,,
+NCON,nConnect,64,Bus Tracking,GPS Dashboard,Up Coming,,,,,,
+NCON,nConnect,65,Micro schedule Docs,New Module To keep track of all the documents and attachments provided in the MS module,Up Coming,,,,,,
+NCON,nConnect,66,Parent Feedback Collection Module,"Implement a structured parent feedback collection system through the nConnect Staff App, enabling staff (vice principals, principals, AGMs) to gather responses via predefined questions over phone calls.",Up Coming,,,,,,

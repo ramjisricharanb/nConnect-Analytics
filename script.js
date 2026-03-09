@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (m === ACTIVE_MONTH) opt.selected = true;
             monthSelector.appendChild(opt);
         });
-        document.getElementById('period-covered').innerHTML = `<strong style="color:white;">Dataset:</strong> ${ACTIVE_MONTH} &nbsp; | &nbsp; Prepared for Manager Review`;
+        document.getElementById('period-covered').innerHTML = `<strong style="color:white;">Month:</strong> ${ACTIVE_MONTH} &nbsp; | &nbsp; Prepared for Manager Review`;
 
         // Show delete button only if there is more than 1 dataset
         btnDeleteDataset.style.display = ALL_MONTHS.length > 1 ? 'inline-block' : 'none';

@@ -34,12 +34,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Background sync: Ensure server-provided defaults are present for all visitors
         let updatedLocal = false;
 
-        if (!ALL_MONTHS.includes("February 2026 (Base)")) {
+        // Clean out any duplicates or old names
+        if (ALL_MONTHS.some(m => m.includes("February"))) {
+            ALL_MONTHS = ALL_MONTHS.filter(m => !m.includes("February"));
+            // remove old cache
+            localStorage.removeItem(DB_DATA_PREFIX + "February 2025 (Base)");
+            localStorage.removeItem(DB_DATA_PREFIX + "February 2026 (Base)");
+            updatedLocal = true;
+        }
+        
+        // Remove any literal duplicate entries universally
+        const uniqueSet = new Set(ALL_MONTHS);
+        if (uniqueSet.size !== ALL_MONTHS.length) {
+            ALL_MONTHS = Array.from(uniqueSet);
+            updatedLocal = true;
+        }
+
+        if (!ALL_MONTHS.includes("FEB")) {
             try {
                 const response = await fetch('data.json');
                 const rawData = await response.json();
-                ALL_MONTHS.push("February 2025 (Base)");
-                localStorage.setItem(DB_DATA_PREFIX + "February 2025 (Base)", JSON.stringify(rawData));
+                ALL_MONTHS.unshift("FEB"); // placing it at the beginning
+                localStorage.setItem(DB_DATA_PREFIX + "FEB", JSON.stringify(rawData));
                 updatedLocal = true;
             } catch (e) { }
         }

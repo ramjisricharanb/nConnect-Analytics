@@ -30,21 +30,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- Data Boot Up ---
     try {
         ALL_MONTHS = JSON.parse(localStorage.getItem(DB_INDEX_KEY) || "[]");
-        if (ALL_MONTHS.length === 0) {
-            // First time load: Fetch default and save to local storage
-            const response = await fetch('data.json');
-            const rawData = await response.json();
-            ACTIVE_MONTH = "February 2025 (Base)";
-            ALL_MONTHS.push(ACTIVE_MONTH);
-            localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
-            localStorage.setItem(DB_DATA_PREFIX + ACTIVE_MONTH, JSON.stringify(rawData));
-            GLOBAL_DATA = processData(rawData);
-        } else {
-            // Load newest/most recent active month
-            ACTIVE_MONTH = ALL_MONTHS[ALL_MONTHS.length - 1];
-            const rawData = JSON.parse(localStorage.getItem(DB_DATA_PREFIX + ACTIVE_MONTH) || "[]");
-            GLOBAL_DATA = processData(rawData);
+
+        // Background sync: Ensure server-provided defaults are present for all visitors
+        let updatedLocal = false;
+        
+        if (!ALL_MONTHS.includes("February 2025 (Base)")) {
+            try {
+                const response = await fetch('data.json');
+                const rawData = await response.json();
+                ALL_MONTHS.push("February 2025 (Base)");
+                localStorage.setItem(DB_DATA_PREFIX + "February 2025 (Base)", JSON.stringify(rawData));
+                updatedLocal = true;
+            } catch(e) {}
         }
+        
+        if (!ALL_MONTHS.includes("March 2025")) {
+            try {
+                const resMarch = await fetch('March_Data.json');
+                if (resMarch.ok) {
+                    const rawMarch = await resMarch.json();
+                    ALL_MONTHS.push("March 2025");
+                    localStorage.setItem(DB_DATA_PREFIX + "March 2025", JSON.stringify(rawMarch));
+                    updatedLocal = true;
+                }
+            } catch(e) {}
+        }
+
+        if (updatedLocal) {
+            localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
+        }
+
+        // Load newest/most recent active month
+        ACTIVE_MONTH = ALL_MONTHS[ALL_MONTHS.length - 1];
+        const rawData = JSON.parse(localStorage.getItem(DB_DATA_PREFIX + ACTIVE_MONTH) || "[]");
+        GLOBAL_DATA = processData(rawData);
         updateMonthDropdown();
         renderDashboard(GLOBAL_DATA);
     } catch (e) {

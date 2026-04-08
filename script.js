@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         choiceResource.removeActiveItems();
         choiceStatus.removeActiveItems();
 
+        document.getElementById('period-covered').innerHTML = `<strong style="color:white;">Month:</strong> ${ACTIVE_MONTH} &nbsp; | &nbsp; Prepared for Manager Review`;
         renderDashboard(GLOBAL_DATA); // Note: renderModuleChart handles Chart.getChart(id).destroy() automatically
     });
 
@@ -136,11 +137,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
                 let data;
                 if (isExcel) {
-                    const workbook = XLSX.read(e.target.result, { type: 'binary' });
+                    const workbook = XLSX.read(e.target.result, { type: 'array', cellDates: true });
                     const firstSheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheetName];
                     // Convert the Excel sheet exactly into the JSON array of objects we expect
-                    data = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+                    // Using raw: false ensures Excel dates are formatted as readable strings instead of serial numbers
+                    data = XLSX.utils.sheet_to_json(worksheet, { defval: "", raw: false, dateNF: "yyyy-mm-dd" });
                 } else {
                     data = JSON.parse(e.target.result);
                 }
@@ -171,7 +173,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         if (isExcel) {
-            reader.readAsBinaryString(file);
+            reader.readAsArrayBuffer(file);
         } else {
             reader.readAsText(file);
         }
@@ -280,10 +282,22 @@ function applyFilters() {
 }
 
 
-function parseDate(dateStr) {
-    if (!dateStr || typeof dateStr !== 'string') return null;
-    let d = new Date(dateStr.trim());
-    return isNaN(d.getTime()) ? null : d;
+function parseDate(val) {
+    if (!val) return null;
+    if (val instanceof Date) {
+        return isNaN(val.getTime()) ? null : val;
+    }
+    if (typeof val === 'number') {
+        // Excel serial date
+        if (val > 0 && val < 2958465) {
+            return new Date(Math.round((val - 25569) * 86400 * 1000));
+        }
+    }
+    if (typeof val === 'string') {
+        let d = new Date(val.trim());
+        return isNaN(d.getTime()) ? null : d;
+    }
+    return null;
 }
 
 function processData(rows) {
@@ -294,7 +308,19 @@ function processData(rows) {
         // Dynamic Key Finders
         const kMod = keys.find(k => k.toLowerCase().includes('module'));
         const kDesc = keys.find(k => k.toLowerCase().includes('desc'));
-        const kEnv = keys.find(k => k.toLowerCase().replace(/[^a-z]/g, '') === 'adminserverapp' || k.toLowerCase().includes('admin'));
+        let kEnv = keys.find(k => {
+            let lk = k.toLowerCase();
+            let clean = lk.replace(/[^a-z]/g, '');
+            return clean === 'adminserverapp' || lk.includes('admin') || lk.includes('env') || lk.includes('platform') || lk.includes('app');
+        });
+
+        if (!kEnv) {
+            // Fallback: search values to guess which column is the environment
+            kEnv = keys.find(k => {
+                let v = String(row[k] || '').toLowerCase();
+                return v === 'server' || v.includes('admin panel') || v.includes('web app') || v === 'admin' || v === 'app';
+            });
+        }
         const kAuth = keys.find(k => {
             const lk = k.toLowerCase();
             return lk.includes('member') || lk.includes('resource') || lk.includes('author') || lk.includes('developer');
@@ -308,8 +334,12 @@ function processData(rows) {
 
         let desc = kDesc ? String(row[kDesc] || 'No Description').trim() : 'No Description';
 
-        let env = kEnv ? String(row[kEnv] || 'Unknown').trim() : 'Unknown';
-        if (!['Admin', 'Server', 'APP', 'Web'].includes(env)) { env = 'APP'; }
+        let envRaw = kEnv ? String(row[kEnv] || 'Unknown').trim() : 'Unknown';
+        let envLower = envRaw.toLowerCase();
+        let env = 'APP';
+        if (envLower.includes('admin')) env = 'Admin';
+        else if (envLower.includes('server')) env = 'Server';
+        else if (envLower.includes('web') || envLower.includes('wep')) env = 'Web App';
 
         let authorsRaw = kAuth ? String(row[kAuth] || 'Unassigned').trim() : 'Unassigned';
         let authorArray = authorsRaw.split(',').map(s => s.trim()).filter(s => s.length > 0);
@@ -369,7 +399,7 @@ function renderCoreAnalytics(data) {
     let totalDeployed = 0;
     let sameDayDeploys = 0;
     let modMap = {};
-    let envMap = { 'Server': 0, 'Admin': 0, 'APP': 0 };
+    let envMap = { 'Server': 0, 'Admin': 0, 'APP': 0, 'Web App': 0 };
 
     let sumCycle = 0;
     let maxCycle = 0;

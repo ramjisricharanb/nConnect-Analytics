@@ -67,23 +67,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             updatedLocal = true;
         }
 
-        if (!ALL_MONTHS.includes("March")) {
-            try {
-                // Fetch the actual Excel file directly from the repo
-                const resMarch = await fetch('March.xlsx');
-                if (resMarch.ok) {
-                    const arrayBuffer = await resMarch.arrayBuffer();
-                    const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });
-                    const sheetName = workbook.SheetNames[0];
-                    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: false, dateNF: 'mm/dd/yyyy' });
-                    
+        try {
+            // Always fetch the newest March Excel sheet to ensure live updates
+            const resMarch = await fetch('March.xlsx');
+            if (resMarch.ok) {
+                const arrayBuffer = await resMarch.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });
+                const sheetName = workbook.SheetNames[0];
+                const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: false, dateNF: 'mm/dd/yyyy' });
+                
+                if (!ALL_MONTHS.includes("March")) {
                     ALL_MONTHS.push("March");
-                    localStorage.setItem(DB_DATA_PREFIX + "March", JSON.stringify(rows));
-                    updatedLocal = true;
                 }
-            } catch(e) {
-                console.log("March.xlsx not found on server.");
+                // Always overwrite local storage with the absolutely newest spreadsheet data
+                localStorage.setItem(DB_DATA_PREFIX + "March", JSON.stringify(rows));
+                updatedLocal = true;
             }
+        } catch(e) {
+            console.log("March.xlsx not found on server.");
         }
 
         if (updatedLocal) {

@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const arrayBuffer = await resMarch.arrayBuffer();
                 const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });
                 const sheetName = workbook.SheetNames[0];
-                const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: false, dateNF: 'mm/dd/yyyy' });
+                const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
                 
                 if (!ALL_MONTHS.includes("March")) {
                     ALL_MONTHS.push("March");
@@ -192,8 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const firstSheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[firstSheetName];
                     // Convert the Excel sheet exactly into the JSON array of objects we expect
-                    // Using raw: false ensures Excel dates are formatted as readable strings instead of serial numbers
-                    data = XLSX.utils.sheet_to_json(worksheet, { defval: "", raw: false, dateNF: "yyyy-mm-dd" });
+                    data = XLSX.utils.sheet_to_json(worksheet, { defval: "", raw: true });
                 } else {
                     data = JSON.parse(e.target.result);
                 }
@@ -345,8 +344,20 @@ function parseDate(val) {
         }
     }
     if (typeof val === 'string') {
-        let d = new Date(val.trim());
-        return isNaN(d.getTime()) ? null : d;
+        let trimmed = val.trim();
+        let d = new Date(trimmed);
+        if (!isNaN(d.getTime())) return d;
+        
+        // Fallback for DD/MM/YYYY or DD-MM-YYYY or DD/MM/YY
+        const parts = trimmed.split(/[\/\-]/);
+        if (parts.length === 3) {
+            let day = parseInt(parts[0], 10);
+            let month = parseInt(parts[1], 10) - 1; // JS months are 0-indexed
+            let year = parseInt(parts[2], 10);
+            if (year < 100) year += 2000;
+            d = new Date(year, month, day);
+            if (!isNaN(d.getTime())) return d;
+        }
     }
     return null;
 }

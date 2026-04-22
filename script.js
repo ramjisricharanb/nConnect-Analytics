@@ -70,7 +70,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             // Always fetch the newest March Excel sheet to ensure live updates
             // Use cache: 'no-store' to bypass cache without breaking local file path compatibility
-            const resMarch = await fetch('March.xlsx', { cache: 'no-store' });
+            let fetchUrl = 'March.xlsx';
+            if (window.location.protocol !== 'file:') {
+                fetchUrl += '?t=' + Date.now();
+            }
+            const resMarch = await fetch(fetchUrl, { cache: 'no-store' });
             if (resMarch.ok) {
                 const arrayBuffer = await resMarch.arrayBuffer();
                 const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });

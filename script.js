@@ -428,6 +428,8 @@ function processData(rows) {
                 sent_to_merge_date: sentDate,
                 merged_date: mergedDate,
                 deployed_date: deployedDate,
+                cycle: Math.round(cycle),
+                status: deployedDate ? 'deployed' : 'pending',
                 cycle_time: cycle,
                 is_deployed: !!deployedDate,
                 is_same_day: (deployedDate && mergedDate) ? (deployedDate.getTime() === mergedDate.getTime()) : false

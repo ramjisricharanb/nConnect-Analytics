@@ -85,7 +85,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 updatedLocal = true;
             }
         } catch(e) {
-            console.log("March.xlsx not found on server.");
+            console.log("March.xlsx not found on server or blocked by local browser permissions.", e);
+            if (window.location.protocol === 'file:') {
+                alert("Warning: Your browser is blocking automatic Excel fetching because you opened the HTML file directly. To see your local changes automatically, run 'Launch Dashboard.command' to start a local server!");
+            }
         }
 
         if (updatedLocal) {

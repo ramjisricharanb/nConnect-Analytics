@@ -633,7 +633,15 @@ function renderTable(data) {
         return;
     }
 
-    const fmt = (d) => d ? d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' }) : '-';
+    const fmt = (d) => {
+        if (!d) return '- (NULL)';
+        if (typeof d === 'string') return `STR: ${d.substring(0, 10)}`;
+        if (d instanceof Date) {
+            if (isNaN(d.getTime())) return 'ERR: INVALID_DATE';
+            return `DT: ${d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' })}`;
+        }
+        return `ERR: TYPE:${typeof d}`;
+    };
 
     data.forEach(d => {
         const badgeClass = d.is_deployed ? 'status-deployed' : 'status-pending';

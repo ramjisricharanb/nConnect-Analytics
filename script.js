@@ -95,6 +95,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
+        try {
+            // Fetch April data automatically for production readiness
+            let fetchUrlApril = 'April.xlsx';
+            if (window.location.protocol !== 'file:') {
+                fetchUrlApril += '?t=' + Date.now();
+            }
+            const resApril = await fetch(fetchUrlApril, { cache: 'no-store' });
+            if (resApril.ok) {
+                const arrayBufferApril = await resApril.arrayBuffer();
+                const workbookApril = XLSX.read(arrayBufferApril, { type: 'array', cellDates: true });
+                const sheetNameApril = workbookApril.SheetNames[0];
+                const rowsApril = XLSX.utils.sheet_to_json(workbookApril.Sheets[sheetNameApril], { raw: true });
+                
+                if (!ALL_MONTHS.includes("April")) {
+                    ALL_MONTHS.push("April");
+                }
+                localStorage.setItem(DB_DATA_PREFIX + "April", JSON.stringify(rowsApril));
+                updatedLocal = true;
+            }
+        } catch(e) {
+            console.log("April.xlsx not found on server", e);
+        }
+
         if (updatedLocal) {
             localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
         }
@@ -397,6 +420,7 @@ function processData(rows) {
         const kSent = keys.find(k => k.toLowerCase().includes('sent'));
         const kMerg = keys.find(k => k.toLowerCase().includes('merg'));
         const kDep = keys.find(k => k.toLowerCase().includes('deploy'));
+        const kMrLink = keys.find(k => k.toLowerCase().includes('mr link'));
 
         let mod = kMod ? String(row[kMod] || '').trim() : '';
         if (mod === "") mod = "Generic";
@@ -416,6 +440,7 @@ function processData(rows) {
         const sentDate = parseDate(kSent ? row[kSent] : null);
         const mergedDate = parseDate(kMerg ? row[kMerg] : null);
         const deployedDate = parseDate(kDep ? row[kDep] : null);
+        let mrLink = kMrLink ? String(row[kMrLink] || '').trim() : '';
 
         let cycle = 0;
 
@@ -439,7 +464,8 @@ function processData(rows) {
                 status: deployedDate ? 'deployed' : 'pending',
                 cycle_time: cycle,
                 is_deployed: !!deployedDate,
-                is_same_day: (deployedDate && mergedDate) ? (deployedDate.getTime() === mergedDate.getTime()) : false
+                is_same_day: (deployedDate && mergedDate) ? (deployedDate.getTime() === mergedDate.getTime()) : false,
+                mr_link: mrLink
             });
         }
     });
@@ -733,8 +759,9 @@ function renderModuleInsights(data) {
                 ? task.resource.map(r => `<span class="resource-tag">👤 ${r}</span>`).join('')
                 : `<span class="resource-tag" style="color:var(--text-muted); border-color:var(--border); background:transparent;">Unassigned</span>`;
 
+            const mrLinkHtml = task.mr_link ? ` <a href="${task.mr_link}" target="_blank" style="color: #a78bfa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>` : '';
             taskEl.innerHTML = `
-                <div class="task-desc">${task.description || 'No description provided.'}</div>
+                <div class="task-desc">${task.description || 'No description provided.'}${mrLinkHtml}</div>
                 <div class="resource-tags">${resourcesHtml}</div>
             `;
             content.appendChild(taskEl);

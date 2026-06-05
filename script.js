@@ -118,6 +118,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log("April.xlsx not found on server", e);
         }
 
+        try {
+            // Fetch May data automatically
+            let fetchUrlMay = 'May.xlsx';
+            if (window.location.protocol !== 'file:') {
+                fetchUrlMay += '?t=' + Date.now();
+            }
+            const resMay = await fetch(fetchUrlMay, { cache: 'no-store' });
+            if (resMay.ok) {
+                const arrayBufferMay = await resMay.arrayBuffer();
+                const workbookMay = XLSX.read(arrayBufferMay, { type: 'array', cellDates: true });
+                const sheetNameMay = workbookMay.SheetNames[0];
+                const rowsMay = XLSX.utils.sheet_to_json(workbookMay.Sheets[sheetNameMay], { raw: true });
+                
+                if (!ALL_MONTHS.includes("May")) {
+                    ALL_MONTHS.push("May");
+                }
+                localStorage.setItem(DB_DATA_PREFIX + "May", JSON.stringify(rowsMay));
+                updatedLocal = true;
+            }
+        } catch(e) {
+            console.log("May.xlsx not found on server", e);
+        }
+
         if (updatedLocal) {
             localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
         }
@@ -398,7 +421,10 @@ function processData(rows) {
         const keys = Object.keys(row);
 
         // Dynamic Key Finders
-        const kMod = keys.find(k => k.toLowerCase().includes('module'));
+        const kMod = keys.find(k => {
+            const lk = k.toLowerCase();
+            return lk.includes('module') || lk === 'tpt';
+        });
         const kDesc = keys.find(k => k.toLowerCase().includes('desc'));
         let kEnv = keys.find(k => {
             let lk = k.toLowerCase();

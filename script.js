@@ -1,6 +1,6 @@
-Chart.defaults.color = '#94a3b8';
+Chart.defaults.color = '#475569';
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.borderColor = '#334155'; // Using UI's subtle border color
+Chart.defaults.borderColor = '#e2e8f0'; // Using UI's subtle border color
 Chart.defaults.plugins.tooltip.backgroundColor = '#0f172a';
 
 const DB_INDEX_KEY = 'nc_months_index';
@@ -669,7 +669,7 @@ function renderModuleChart(modMap) {
             },
             scales: {
                 x: {
-                    grid: { color: '#334155' }
+                    grid: { color: '#e2e8f0' }
                 },
                 y: {
                     grid: { display: false }

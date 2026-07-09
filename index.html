@@ -13,13 +13,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    <link rel="stylesheet" href="index.css?v=8">
+    <link rel="stylesheet" href="index.css?v=10">
     <style>
         .choices__inner {
-            background-color: var(--bg-panel, #1e293b) !important;
-            border: 1px solid #334155 !important;
+            background-color: var(--bg-panel, #ffffff) !important;
+            border: 1px solid var(--border, #e2e8f0) !important;
             border-radius: 6px !important;
-            color: var(--text-primary, #f8fafc) !important;
+            color: var(--text-primary, #0f172a) !important;
             min-height: 38px !important;
             padding: 2px 8px !important;
             font-size: 0.9rem;
@@ -27,13 +27,13 @@
 
         .choices__input {
             background-color: transparent !important;
-            color: var(--text-primary, #f8fafc) !important;
+            color: var(--text-primary, #0f172a) !important;
         }
 
         .choices__list--dropdown {
-            background-color: var(--bg-panel, #1e293b) !important;
-            border: 1px solid #334155 !important;
-            color: var(--text-primary, #f8fafc) !important;
+            background-color: var(--bg-panel, #ffffff) !important;
+            border: 1px solid var(--border, #e2e8f0) !important;
+            color: var(--text-primary, #0f172a) !important;
             z-index: 9999 !important;
             margin-top: 4px;
             border-radius: 6px;
@@ -55,7 +55,7 @@
         }
 
         .choices[data-type*="select-multiple"] .choices__button {
-            border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-left: 1px solid rgba(0, 0, 0, 0.1) !important;
         }
 
         .choices {
@@ -63,7 +63,7 @@
             margin-bottom: 0px !important;
         }
     </style>
-    <script src="script.js?v=32" defer></script>
+    <script src="script.js?v=33" defer></script>
 </head>
 
 <body>
@@ -76,9 +76,9 @@
             </div>
             <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                 <div style="display: flex; align-items: center; gap: 8px;"><label
-                        style="color: #94a3b8; font-size: 0.9rem; font-weight: 600;">Month:</label><select
+                        style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Month:</label><select
                         id="monthSelector"
-                        style="background-color: var(--bg-panel); color: white; border: 1px solid #334155; padding: 8px 12px; border-radius: 6px; outline: none; cursor: pointer; font-size: 0.95rem; min-width: 180px; font-weight: 500;">
+                        style="background-color: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; outline: none; cursor: pointer; font-size: 0.95rem; min-width: 180px; font-weight: 500;">
                         <option value="">Loading...</option>
                     </select><button id="btn-delete-dataset"
                         style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 6px 10px; border-radius: 6px; cursor: pointer; margin-left: 2px; display: none;"
@@ -203,21 +203,21 @@
         <div class="panel"
             style="width: 400px; max-width: 90%; margin: 0; animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="margin: 0; color: white;">Upload New Month</h3><button id="btn-close-modal"
-                    style="background: none; border: none; color: #94a3b8; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0;">&times;
+                <h3 style="margin: 0; color: var(--text-primary);">Upload New Month</h3><button id="btn-close-modal"
+                    style="background: none; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0;">&times;
                 </button>
             </div>
             <div style="margin-bottom: 15px;"><label
-                    style="display: block; color: #94a3b8; font-size: 0.85rem; margin-bottom: 6px;">Month Name (e.g.
+                    style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 6px;">Month Name (e.g.
                     March 2025)</label><input type="text" id="uploadMonthName" placeholder="Enter month name"
-                    style="width: 100%; background-color: var(--bg-main); color: white; border: 1px solid #334155; padding: 10px 12px; border-radius: 6px; outline: none; font-family: inherit; font-size: 0.95rem;">
+                    style="width: 100%; background-color: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border); padding: 10px 12px; border-radius: 6px; outline: none; font-family: inherit; font-size: 0.95rem;">
             </div>
             <div style="margin-bottom: 25px;"><label
-                    style="display: block; color: #94a3b8; font-size: 0.85rem; margin-bottom: 6px;">Select Excel or JSON
+                    style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 6px;">Select Excel or JSON
                     File (*.xlsx, *.csv, *.json)</label><input type="file" id="uploadJsonFile" accept=".json,.xlsx,.csv"
-                    style="width: 100%; color: #94a3b8; font-size: 0.9rem;" /></div>
+                    style="width: 100%; color: var(--text-muted); font-size: 0.9rem;" /></div>
             <div style="display: flex; justify-content: flex-end; gap: 10px;"><button id="btn-cancel-upload"
-                    style="background-color: transparent; color: #94a3b8; border: 1px solid #334155; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;">Cancel</button><button
+                    style="background-color: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;">Cancel</button><button
                     id="btn-save-upload" class="btn-primary"
                     style="opacity: 0.7; cursor: not-allowed; transition: all 0.2s;">Save Data</button></div>
         </div>

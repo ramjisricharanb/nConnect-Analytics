@@ -141,6 +141,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log("May.xlsx not found on server", e);
         }
 
+        try {
+            // Fetch June data automatically
+            let fetchUrlJune = 'June.xlsx';
+            if (window.location.protocol !== 'file:') {
+                fetchUrlJune += '?t=' + Date.now();
+            }
+            const resJune = await fetch(fetchUrlJune, { cache: 'no-store' });
+            if (resJune.ok) {
+                const arrayBufferJune = await resJune.arrayBuffer();
+                const workbookJune = XLSX.read(arrayBufferJune, { type: 'array', cellDates: true });
+                const sheetNameJune = workbookJune.SheetNames[0];
+                const rowsJune = XLSX.utils.sheet_to_json(workbookJune.Sheets[sheetNameJune], { raw: true });
+                
+                if (!ALL_MONTHS.includes("June")) {
+                    ALL_MONTHS.push("June");
+                }
+                localStorage.setItem(DB_DATA_PREFIX + "June", JSON.stringify(rowsJune));
+                updatedLocal = true;
+            }
+        } catch(e) {
+            console.log("June.xlsx not found on server", e);
+        }
+
         if (updatedLocal) {
             localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
         }

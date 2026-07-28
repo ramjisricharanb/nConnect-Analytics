@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         choiceStatus.removeActiveItems();
 
         document.getElementById('period-covered').innerHTML = `<strong style="color:white;">Month:</strong> ${ACTIVE_MONTH} &nbsp; | &nbsp; Prepared for Manager Review`;
+        closeDrawer();
         renderDashboard(GLOBAL_DATA); // Note: renderModuleChart handles Chart.getChart(id).destroy() automatically
     });
 
@@ -246,6 +247,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             choiceStatus.removeActiveItems();
 
             updateMonthDropdown();
+            closeDrawer();
             renderDashboard(GLOBAL_DATA);
         }
     });
@@ -286,6 +288,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 updateMonthDropdown();
                 toggleModal(false);
+                closeDrawer();
 
                 choiceModule.removeActiveItems();
                 choiceEnv.removeActiveItems();
@@ -361,6 +364,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Show delete button only if there is more than 1 dataset
         btnDeleteDataset.style.display = ALL_MONTHS.length > 1 ? 'inline-block' : 'none';
     }
+
+    // --- Drawer Event Listeners ---
+    const drawerClose = document.getElementById('drawerClose');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+    // Escape key to close drawer
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeDrawer();
+        }
+    });
 
 });
 
@@ -772,22 +788,7 @@ function renderModuleInsights(data) {
         const header = document.createElement('div');
         header.className = 'module-card-header';
         header.onclick = () => {
-            const content = card.querySelector('.module-card-content');
-            const isCurrentlyExpanded = content.classList.contains('expanded');
-
-            // Collapse all other expanded cards first
-            const allCards = grid.querySelectorAll('.module-card');
-            allCards.forEach(c => {
-                c.style.zIndex = '1';
-                const cContent = c.querySelector('.module-card-content');
-                if (cContent) cContent.classList.remove('expanded');
-            });
-
-            // If the clicked card wasn't already expanded, expand it
-            if (!isCurrentlyExpanded) {
-                card.style.zIndex = '100'; // Bring to front
-                content.classList.add('expanded');
-            }
+            openDrawer(moduleName, tasks);
         };
 
         header.innerHTML = `
@@ -795,53 +796,54 @@ function renderModuleInsights(data) {
             <span class="module-card-count">${tasks.length} Task${tasks.length !== 1 ? 's' : ''}</span>
         `;
 
-        // Content
-        const content = document.createElement('div');
-        content.className = 'module-card-content';
-
-        tasks.forEach(task => {
-            const taskEl = document.createElement('div');
-            taskEl.className = 'task-item';
-
-            // Resources formatting
-            const resourcesHtml = task.resource && task.resource.length > 0
-                ? task.resource.map(r => `<span class="resource-tag">👤 ${r}</span>`).join('')
-                : `<span class="resource-tag" style="color:var(--text-muted); border-color:var(--border); background:transparent;">Unassigned</span>`;
-
-            const mrLinkHtml = task.mr_link ? ` <a href="${task.mr_link}" target="_blank" style="color: #a78bfa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>` : '';
-            taskEl.innerHTML = `
-                <div class="task-desc">${task.description || 'No description provided.'}${mrLinkHtml}</div>
-                <div class="resource-tags">${resourcesHtml}</div>
-            `;
-            content.appendChild(taskEl);
-        });
-
         card.appendChild(header);
-        card.appendChild(content);
         grid.appendChild(card);
     });
 }
 
-// Global click listener to close module insights when clicking outside
-document.addEventListener('click', (event) => {
-    const isClickInsideModuleCard = event.target.closest('.module-card');
+function openDrawer(moduleName, tasks) {
+    const sideDrawer = document.getElementById('sideDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const drawerTitle = document.getElementById('drawerTitle');
+    const drawerSubtitle = document.getElementById('drawerSubtitle');
+    const drawerBody = document.getElementById('drawerBody');
 
-    // If the click is not inside any module card, collapse all expanded cards
-    if (!isClickInsideModuleCard) {
-        const grid = document.getElementById('module-insights-grid');
-        if (!grid) return;
+    if (!sideDrawer || !drawerBackdrop) return;
 
-        const allCards = grid.querySelectorAll('.module-card');
-        allCards.forEach(c => {
-            c.style.zIndex = '1';
-            const content = c.querySelector('.module-card-content');
-            if (content) content.classList.remove('expanded');
-        });
-    } else {
-        // If they click INSIDE a module card, but it's not the expanded one, 
-        // collapse other cards. (Handled by the header click listener already)
-        // However, if they click inside the opened card *content* area, we shouldn't close it.
-        // If they click on another card's area handled naturally by the loop in header onClick
-    }
-});
+    drawerTitle.textContent = moduleName;
+    drawerSubtitle.textContent = `${tasks.length} Task${tasks.length !== 1 ? 's' : ''}`;
+    
+    drawerBody.innerHTML = '';
+    tasks.forEach((task, idx) => {
+        const taskEl = document.createElement('div');
+        taskEl.className = 'task-item';
+
+        const resourcesHtml = task.resource && task.resource.length > 0
+            ? task.resource.map(r => `<span class="resource-tag">👤 ${r}</span>`).join('')
+            : `<span class="resource-tag" style="color:var(--text-muted); border-color:var(--border); background:transparent;">Unassigned</span>`;
+
+        const mrLinkHtml = task.mr_link ? ` <a href="${task.mr_link}" target="_blank" style="color: #a78bfa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>` : '';
+        taskEl.innerHTML = `
+            <div class="task-number">${idx + 1}</div>
+            <div class="task-content">
+                <div class="task-desc">${task.description || 'No description provided.'}${mrLinkHtml}</div>
+                <div class="resource-tags">${resourcesHtml}</div>
+            </div>
+        `;
+        drawerBody.appendChild(taskEl);
+    });
+
+    sideDrawer.classList.add('active');
+    drawerBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+    const sideDrawer = document.getElementById('sideDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    if (sideDrawer) sideDrawer.classList.remove('active');
+    if (drawerBackdrop) drawerBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
 

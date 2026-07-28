@@ -94,23 +94,53 @@
         <section class="kpi-grid animate-slide-up" style="animation-delay: 0.2s;">
             <div class="kpi-box" style="--accent: #3b82f6;">
                 <div class="kpi-value" id="kpi-total">0</div>
-                <div class="kpi-label">TOTAL MRS</div>
+                <div class="kpi-label">
+                    TOTAL MRS
+                    <span class="tooltip-container">
+                        <span class="info-icon">ⓘ</span>
+                        <span class="tooltip-text">The total number of Merge Requests submitted for review during the selected month.</span>
+                    </span>
+                </div>
             </div>
             <div class="kpi-box" style="--accent: #10b981;">
                 <div class="kpi-value" id="kpi-deploy-rate">0%</div>
-                <div class="kpi-label">DEPLOY RATE</div>
+                <div class="kpi-label">
+                    DEPLOY RATE
+                    <span class="tooltip-container">
+                        <span class="info-icon">ⓘ</span>
+                        <span class="tooltip-text">Percentage of Merge Requests that have been successfully deployed.</span>
+                    </span>
+                </div>
             </div>
             <div class="kpi-box" style="--accent: #8b5cf6;">
                 <div class="kpi-value" id="kpi-modules">0</div>
-                <div class="kpi-label">MODULES ACTIVE</div>
+                <div class="kpi-label">
+                    MODULES ACTIVE
+                    <span class="tooltip-container">
+                        <span class="info-icon">ⓘ</span>
+                        <span class="tooltip-text">The number of distinct system modules or components that had active changes.</span>
+                    </span>
+                </div>
             </div>
             <div class="kpi-box" style="--accent: #eab308;">
                 <div class="kpi-value"><span id="kpi-avg-cycle">0</span><span class="unit">d</span></div>
-                <div class="kpi-label">AVG CYCLE TIME</div>
+                <div class="kpi-label">
+                    AVG CYCLE TIME
+                    <span class="tooltip-container">
+                        <span class="info-icon">ⓘ</span>
+                        <span class="tooltip-text">Average time (in days) from when code is sent for review to when it is deployed.</span>
+                    </span>
+                </div>
             </div>
             <div class="kpi-box" style="--accent: #ef4444;">
                 <div class="kpi-value" id="kpi-same-day">0%</div>
-                <div class="kpi-label">SAME DAY DEPLOYS</div>
+                <div class="kpi-label">
+                    SAME DAY DEPLOYS
+                    <span class="tooltip-container">
+                        <span class="info-icon">ⓘ</span>
+                        <span class="tooltip-text">Percentage of deployed Merge Requests that were merged and deployed on the same day.</span>
+                    </span>
+                </div>
             </div>
         </section><!-- Module Activity Bar Chart -->
         <section class="panel animate-slide-up" style="animation-delay: 0.3s;">
@@ -125,12 +155,36 @@
             <section class="panel">
                 <h3 class="panel-title">⚠️ RISK & BOTTLENECK SUMMARY</h3>
                 <div class="risk-list">
-                    <div class="risk-item border-red"><span>MRs with Deployment>5 days</span><strong
-                            id="risk-delayed">0</strong></div>
-                    <div class="risk-item border-red"><span>MRs with Deployment>2x Avg Cycle</span><strong
-                            id="risk-outliers">0</strong></div>
-                    <div class="risk-item border-yellow"><span>Slowest Deployment Lead Time</span><strong><span
-                                id="risk-max">0</span><span style="font-size:0.9rem">d</span></strong></div>
+                    <div class="risk-item border-red">
+                        <span>
+                            MRs with Deployment>5 days
+                            <span class="tooltip-container">
+                                <span class="info-icon">ⓘ</span>
+                                <span class="tooltip-text">Merge Requests that took longer than 5 days to be successfully deployed.</span>
+                            </span>
+                        </span>
+                        <strong id="risk-delayed">0</strong>
+                    </div>
+                    <div class="risk-item border-red">
+                        <span>
+                            MRs with Deployment>2x Avg Cycle
+                            <span class="tooltip-container">
+                                <span class="info-icon">ⓘ</span>
+                                <span class="tooltip-text">Merge Requests whose cycle time is more than double the average, indicating severe review or deploy delays.</span>
+                            </span>
+                        </span>
+                        <strong id="risk-outliers">0</strong>
+                    </div>
+                    <div class="risk-item border-yellow">
+                        <span>
+                            Slowest Deployment Lead Time
+                            <span class="tooltip-container">
+                                <span class="info-icon">ⓘ</span>
+                                <span class="tooltip-text">The maximum number of days it took for a single Merge Request to get deployed.</span>
+                            </span>
+                        </span>
+                        <strong><span id="risk-max">0</span><span style="font-size:0.9rem">d</span></strong>
+                    </div>
                 </div>
             </section>
         </div><!-- Full KPI Table (from image 4) -->
@@ -220,6 +274,21 @@
                     style="background-color: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;">Cancel</button><button
                     id="btn-save-upload" class="btn-primary"
                     style="opacity: 0.7; cursor: not-allowed; transition: all 0.2s;">Save Data</button></div>
+        </div>
+    </div>
+
+    <!-- Side Drawer for Module Details -->
+    <div id="drawerBackdrop" class="drawer-backdrop"></div>
+    <div id="sideDrawer" class="side-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+        <div class="drawer-header">
+            <div>
+                <h2 id="drawerTitle" class="drawer-title">Module Details</h2>
+                <span id="drawerSubtitle" class="drawer-subtitle">0 Tasks</span>
+            </div>
+            <button id="drawerClose" class="drawer-close" aria-label="Close panel">&times;</button>
+        </div>
+        <div id="drawerBody" class="drawer-body">
+            <!-- Dynamically Injected MRs -->
         </div>
     </div>
 </body>

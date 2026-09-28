@@ -67,102 +67,53 @@ document.addEventListener('DOMContentLoaded', async () => {
             updatedLocal = true;
         }
 
-        try {
-            // Always fetch the newest March Excel sheet to ensure live updates
-            // Use cache: 'no-store' to bypass cache without breaking local file path compatibility
-            let fetchUrl = 'March.xlsx';
-            if (window.location.protocol !== 'file:') {
-                fetchUrl += '?t=' + Date.now();
-            }
-            const resMarch = await fetch(fetchUrl, { cache: 'no-store' });
-            if (resMarch.ok) {
-                const arrayBuffer = await resMarch.arrayBuffer();
-                const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });
-                const sheetName = workbook.SheetNames[0];
-                const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
-                
-                if (!ALL_MONTHS.includes("March")) {
-                    ALL_MONTHS.push("March");
+        const DEFAULT_SHEETS = [
+            { name: 'March', file: 'March.xlsx' },
+            { name: 'April', file: 'April.xlsx' },
+            { name: 'May', file: 'May.xlsx' },
+            { name: 'June', file: 'June.xlsx' },
+            { name: 'July', file: 'July.xlsx' },
+            { name: 'August', file: 'August.xlsx' }
+        ];
+
+        for (const sheet of DEFAULT_SHEETS) {
+            try {
+                let fetchUrl = sheet.file;
+                if (window.location.protocol !== 'file:') {
+                    fetchUrl += '?t=' + Date.now();
                 }
-                // Always overwrite local storage with the absolutely newest spreadsheet data
-                localStorage.setItem(DB_DATA_PREFIX + "March", JSON.stringify(rows));
-                updatedLocal = true;
-            }
-        } catch(e) {
-            console.log("March.xlsx not found on server or blocked by local browser permissions.", e);
-            if (window.location.protocol === 'file:') {
-                alert("Warning: Your browser is blocking automatic Excel fetching because you opened the HTML file directly. To see your local changes automatically, run 'Launch Dashboard.command' to start a local server!");
+                const res = await fetch(fetchUrl, { cache: 'no-store' });
+                if (res.ok) {
+                    const arrayBuffer = await res.arrayBuffer();
+                    const workbook = XLSX.read(arrayBuffer, { type: 'array', cellDates: true });
+                    const sheetName = workbook.SheetNames[0];
+                    const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
+                    
+                    if (!ALL_MONTHS.includes(sheet.name)) {
+                        ALL_MONTHS.push(sheet.name);
+                    }
+                    // Always overwrite local storage with the newest spreadsheet data
+                    localStorage.setItem(DB_DATA_PREFIX + sheet.name, JSON.stringify(rows));
+                    updatedLocal = true;
+                }
+            } catch(e) {
+                console.log(`${sheet.file} not found on server or blocked by local browser permissions.`, e);
+                if (window.location.protocol === 'file:' && sheet.name === 'March') {
+                    alert("Warning: Your browser is blocking automatic Excel fetching because you opened the HTML file directly. To see your local changes automatically, run 'Launch Dashboard.command' to start a local server!");
+                }
             }
         }
 
-        try {
-            // Fetch April data automatically for production readiness
-            let fetchUrlApril = 'April.xlsx';
-            if (window.location.protocol !== 'file:') {
-                fetchUrlApril += '?t=' + Date.now();
-            }
-            const resApril = await fetch(fetchUrlApril, { cache: 'no-store' });
-            if (resApril.ok) {
-                const arrayBufferApril = await resApril.arrayBuffer();
-                const workbookApril = XLSX.read(arrayBufferApril, { type: 'array', cellDates: true });
-                const sheetNameApril = workbookApril.SheetNames[0];
-                const rowsApril = XLSX.utils.sheet_to_json(workbookApril.Sheets[sheetNameApril], { raw: true });
-                
-                if (!ALL_MONTHS.includes("April")) {
-                    ALL_MONTHS.push("April");
-                }
-                localStorage.setItem(DB_DATA_PREFIX + "April", JSON.stringify(rowsApril));
-                updatedLocal = true;
-            }
-        } catch(e) {
-            console.log("April.xlsx not found on server", e);
-        }
-
-        try {
-            // Fetch May data automatically
-            let fetchUrlMay = 'May.xlsx';
-            if (window.location.protocol !== 'file:') {
-                fetchUrlMay += '?t=' + Date.now();
-            }
-            const resMay = await fetch(fetchUrlMay, { cache: 'no-store' });
-            if (resMay.ok) {
-                const arrayBufferMay = await resMay.arrayBuffer();
-                const workbookMay = XLSX.read(arrayBufferMay, { type: 'array', cellDates: true });
-                const sheetNameMay = workbookMay.SheetNames[0];
-                const rowsMay = XLSX.utils.sheet_to_json(workbookMay.Sheets[sheetNameMay], { raw: true });
-                
-                if (!ALL_MONTHS.includes("May")) {
-                    ALL_MONTHS.push("May");
-                }
-                localStorage.setItem(DB_DATA_PREFIX + "May", JSON.stringify(rowsMay));
-                updatedLocal = true;
-            }
-        } catch(e) {
-            console.log("May.xlsx not found on server", e);
-        }
-
-        try {
-            // Fetch June data automatically
-            let fetchUrlJune = 'June.xlsx';
-            if (window.location.protocol !== 'file:') {
-                fetchUrlJune += '?t=' + Date.now();
-            }
-            const resJune = await fetch(fetchUrlJune, { cache: 'no-store' });
-            if (resJune.ok) {
-                const arrayBufferJune = await resJune.arrayBuffer();
-                const workbookJune = XLSX.read(arrayBufferJune, { type: 'array', cellDates: true });
-                const sheetNameJune = workbookJune.SheetNames[0];
-                const rowsJune = XLSX.utils.sheet_to_json(workbookJune.Sheets[sheetNameJune], { raw: true });
-                
-                if (!ALL_MONTHS.includes("June")) {
-                    ALL_MONTHS.push("June");
-                }
-                localStorage.setItem(DB_DATA_PREFIX + "June", JSON.stringify(rowsJune));
-                updatedLocal = true;
-            }
-        } catch(e) {
-            console.log("June.xlsx not found on server", e);
-        }
+        // Ensure chronological ordering of months
+        const MONTH_ORDER = ['FEB', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        ALL_MONTHS.sort((a, b) => {
+            const idxA = MONTH_ORDER.findIndex(m => a.toLowerCase().startsWith(m.toLowerCase()));
+            const idxB = MONTH_ORDER.findIndex(m => b.toLowerCase().startsWith(m.toLowerCase()));
+            if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+            if (idxA !== -1) return -1;
+            if (idxB !== -1) return 1;
+            return 0;
+        });
 
         if (updatedLocal) {
             localStorage.setItem(DB_INDEX_KEY, JSON.stringify(ALL_MONTHS));
@@ -454,6 +405,35 @@ function parseDate(val) {
     return null;
 }
 
+function splitMembers(str) {
+    if (!str || str === 'Unassigned') return ['Unassigned'];
+    let result = [];
+    let current = '';
+    let inParen = 0;
+    let inQuote = false;
+    for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        if (ch === '"' || ch === "'") {
+            inQuote = !inQuote;
+        } else if (ch === '(' && !inQuote) {
+            inParen++;
+            current += ch;
+        } else if (ch === ')' && !inQuote) {
+            if (inParen > 0) inParen--;
+            current += ch;
+        } else if (ch === ',' && !inQuote && inParen === 0) {
+            let item = current.trim().replace(/^["']|["']$/g, '').trim();
+            if (item) result.push(item);
+            current = '';
+        } else {
+            current += ch;
+        }
+    }
+    let last = current.trim().replace(/^["']|["']$/g, '').trim();
+    if (last) result.push(last);
+    return result.length > 0 ? result : ['Unassigned'];
+}
+
 function processData(rows) {
     let cleaned = [];
     rows.forEach((row, i) => {
@@ -468,14 +448,14 @@ function processData(rows) {
         let kEnv = keys.find(k => {
             let lk = k.toLowerCase();
             let clean = lk.replace(/[^a-z]/g, '');
-            return clean === 'adminserverapp' || lk.includes('admin') || lk.includes('env') || lk.includes('platform') || lk.includes('app');
+            return clean === 'adminserverapp' || clean === 'serverwebapp' || lk.includes('admin') || lk.includes('env') || lk.includes('platform') || lk.includes('app');
         });
 
         if (!kEnv) {
             // Fallback: search values to guess which column is the environment
             kEnv = keys.find(k => {
                 let v = String(row[k] || '').toLowerCase();
-                return v === 'server' || v.includes('admin panel') || v.includes('web app') || v === 'admin' || v === 'app';
+                return v === 'server' || v.includes('admin panel') || v.includes('web app') || v === 'admin' || v === 'app' || v === 'flutter';
             });
         }
         const kAuth = keys.find(k => {
@@ -485,7 +465,7 @@ function processData(rows) {
         const kSent = keys.find(k => k.toLowerCase().includes('sent'));
         const kMerg = keys.find(k => k.toLowerCase().includes('merg'));
         const kDep = keys.find(k => k.toLowerCase().includes('deploy'));
-        const kMrLink = keys.find(k => k.toLowerCase().includes('mr link'));
+        const kMrLink = keys.find(k => k.toLowerCase().includes('mr link') || k.toLowerCase().includes('pr link') || k.toLowerCase().includes('link'));
 
         let mod = kMod ? String(row[kMod] || '').trim() : '';
         if (mod === "") mod = "Generic";
@@ -500,7 +480,7 @@ function processData(rows) {
         else if (envLower.includes('web') || envLower.includes('wep')) env = 'Web App';
 
         let authorsRaw = kAuth ? String(row[kAuth] || 'Unassigned').trim() : 'Unassigned';
-        let authorArray = authorsRaw.split(',').map(s => s.trim()).filter(s => s.length > 0);
+        let authorArray = splitMembers(authorsRaw);
 
         const sentDate = parseDate(kSent ? row[kSent] : null);
         const mergedDate = parseDate(kMerg ? row[kMerg] : null);
@@ -725,13 +705,17 @@ function renderTable(data) {
     }
 
     const fmt = (d) => {
-        if (!d) return '- (NULL)';
-        if (typeof d === 'string') return `STR: ${d.substring(0, 10)}`;
-        if (d instanceof Date) {
-            if (isNaN(d.getTime())) return 'ERR: INVALID_DATE';
-            return `DT: ${d.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: '2-digit' })}`;
+        if (!d) return '-';
+        if (typeof d === 'string') {
+            const parsed = parseDate(d);
+            if (parsed) return parsed.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            return d;
         }
-        return `ERR: TYPE:${typeof d}`;
+        if (d instanceof Date) {
+            if (isNaN(d.getTime())) return '-';
+            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+        return String(d);
     };
 
     data.forEach(d => {

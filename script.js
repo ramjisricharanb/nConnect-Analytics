@@ -727,7 +727,7 @@ function renderTable(data) {
             <tr>
                 <td style="color:#94a3b8;">${d.idx}</td>
                 <td><strong>${d.module}</strong></td>
-                <td title="${d.description}">${descStr}</td>
+                <td title="${d.description}">${descStr}${formatMrLinks(d.mr_link)}</td>
                 <td>${d.environment}</td>
                 <td>${fmt(d.sent_to_merge_date)}</td>
                 <td>${fmt(d.merged_date)}</td>
@@ -785,6 +785,26 @@ function renderModuleInsights(data) {
     });
 }
 
+function formatMrLinks(mrLinkStr) {
+    if (!mrLinkStr) return '';
+    // Extract all URLs from the string (handles newlines, multiple links, spaces, commas, etc.)
+    const urlRegex = /(https?:\/\/[^\s"',]+)/g;
+    const matches = mrLinkStr.match(urlRegex);
+    if (!matches || matches.length === 0) {
+        let trimmed = mrLinkStr.trim();
+        if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+            return ` <a href="${trimmed}" target="_blank" rel="noopener noreferrer" style="color: #a78bfa; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>`;
+        }
+        return '';
+    }
+    
+    if (matches.length === 1) {
+        return ` <a href="${matches[0]}" target="_blank" rel="noopener noreferrer" style="color: #a78bfa; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>`;
+    }
+    
+    return matches.map((url, i) => ` <a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #a78bfa; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK ${i + 1})</a>`).join(' ');
+}
+
 function openDrawer(moduleName, tasks) {
     const sideDrawer = document.getElementById('sideDrawer');
     const drawerBackdrop = document.getElementById('drawerBackdrop');
@@ -806,7 +826,7 @@ function openDrawer(moduleName, tasks) {
             ? task.resource.map(r => `<span class="resource-tag">👤 ${r}</span>`).join('')
             : `<span class="resource-tag" style="color:var(--text-muted); border-color:var(--border); background:transparent;">Unassigned</span>`;
 
-        const mrLinkHtml = task.mr_link ? ` <a href="${task.mr_link}" target="_blank" style="color: #a78bfa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">(MR LINK)</a>` : '';
+        const mrLinkHtml = formatMrLinks(task.mr_link);
         taskEl.innerHTML = `
             <div class="task-number">${idx + 1}</div>
             <div class="task-content">
@@ -829,5 +849,6 @@ function closeDrawer() {
     if (drawerBackdrop) drawerBackdrop.classList.remove('active');
     document.body.style.overflow = '';
 }
+
 
 
